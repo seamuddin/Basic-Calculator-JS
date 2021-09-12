@@ -6,8 +6,10 @@
 </head>
 <body>
 
-	<form class="calculator" name="calc">
+	<!-- <form class="calculator" name="calc">
 		<input class="value" type="text" name="txt" readonly="" >
+		<input class="value" type="text" name="txt1" readonly="" style="display: none;">
+
 		<span class="num clear" onclick="document.calc.txt.value =''" >c</span>
 		<span class="num" onclick="document.calc.txt.value +='/'" >/</span>
 		<span class="num" onclick="document.calc.txt.value +='*'" >*</span>
@@ -27,7 +29,98 @@
 		<span class="num" onclick="document.calc.txt.value +='.'" >.</span>
 		<span class="num equal"  onclick="document.calc.txt.value = eval(calc.txt.value)" >=</span>
 	
+	</form> -->
+
+	<form class="calculator" name="calc">
+		<input class="value" type="text" id="result" name="txt" readonly="" >
+		
+
+		<span class="num clear" onclick="clearr()" >c</span>
+		<span class="num" onclick="set_value('/')" >/</span>
+		<span class="num" onclick="set_value('*')" >*</span>
+		<span class="num" onclick="set_value('7')" >7</span>
+		<span class="num" onclick="set_value('8')" >8</span>
+		<span class="num" onclick="set_value('9')" >9</span>
+		<span class="num" onclick="set_value('-')" >-</span>
+		<span class="num" onclick="set_value('4')" >4</span>
+		<span class="num" onclick="set_value('5')" >5</span>
+		<span class="num" onclick="set_value('6')" >6</span>
+		<span class="num plus" onclick="set_value('+')" >+</span>
+		<span class="num" onclick="set_value('3')" >3</span>
+		<span class="num" onclick="set_value('2')" >2</span>
+		<span class="num" onclick="set_value('1')" >1</span>
+		<span class="num" onclick="set_value('0')" >0</span>
+		<span class="num" onclick="set_value('00')" >00</span>
+		<span class="num equal"  onclick="result()" >=</span>
+	
 	</form>
 
+	<script type="text/javascript">
+		// let history = 0
+		// function calc1(val)
+		// {
+		// 	history = eval(val+history)
+		// 	console.log(history)
+		// }
+		// console.log(history)
+		document.getElementById('result').value = 0;
+		var is_first = 0;
+		var prev_value = 0;
+		var current_operator;
+		var current_value='0';
+				function set_value(value){
+			if (value === '0' || value=== '1' || value=== '2' || value=== '3' || value=== '4' || value=== '5' || value=== '6' || value=== '7' || value=== '8' || value=== '9' || value ==='00'){
+
+				if(current_value == 0 || current_value == '0' || current_value == ''){
+			current_value = '' + value;
+					}
+					else{
+						current_value += value;
+					}
+
+		document.getElementById('result').value = current_value;
+				
+				
+			}
+			else if (value === '-' || value === '+' || value === '*' || value === '/' || value === '%')
+
+			{
+				if (current_operator){
+					equation = prev_value + current_operator + current_value;
+					console.log(equation);
+					res = eval(equation);
+					document.getElementById('result').value = res;
+					prev_value = res;
+					current_value = '0';
+					current_operator = value;
+				}
+				else{
+					prev_value = current_value;
+					current_value = '0'
+					current_operator = value;
+					document.getElementById('result').value = prev_value;
+				}
+				
+
+
+			}
+		}
+
+		function result()
+		{
+					equation = prev_value + current_operator + current_value;
+					console.log(equation);
+					res = eval(equation);
+					document.getElementById('result').value = res;
+		}
+		function clearr()
+
+		{
+			document.getElementById('result').value = '0';
+	current_value = '0';
+	prev_value = '0';
+		}
+
+	</script>
 </body>
 </html>

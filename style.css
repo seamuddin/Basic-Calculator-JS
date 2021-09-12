@@ -65,6 +65,7 @@ body
 }
 .calcualtor span.equal
 {
+	grid-column: span 2;
 	background-color: #ff2e77!important;
 }
 
@@ -72,4 +73,5 @@ body
 {
 	height: 10px;
 	color: blue;
+	grid-column: span 2;
 }
